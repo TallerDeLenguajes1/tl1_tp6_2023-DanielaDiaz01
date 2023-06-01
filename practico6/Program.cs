@@ -1,43 +1,60 @@
-﻿// See https://aka.ms/new-console-template for more information
-/*
-Console.WriteLine("Hello, World!");
-int a;
-int b;
-a=10;
-b=a;
-Console.WriteLine("valor de a:"+a);
-Console.WriteLine("valor de b:"+b);
+﻿
+/*PUNTO2_Calculadora V1
+construya un programa que sea una calculadora que permita al usuario realizar las 4 
+operaciones basicas (Sumar, Restar, Multiplicar y Dividir) a partir de un menú para 
+seleccionar la opcion a elegir y que luego pida dos numeros y que devuelva el resultado 
+de la operacion seleccionada. Ademas una vez que termine de realizar la operacion le 
+pregunte si desea realizar otro calculo.
 */
 
-/*PUNTO1
-Construir un programa que permita invertir un numero. Verifique que el
-texto ingresado es de hecho un número y, en caso afirmativo, realice la inversion del
-numero sólo si éste es mayor a 0
-*/
+Console.WriteLine("\nCALCULADORA");
+Console.WriteLine("\nSeleccione una opcion:");
 
-Console.WriteLine("Punto 1");
-Console.WriteLine("Ingrese un numero:");
+int control=1;
+while(control != 0){
+    Console.WriteLine("\n1_sumar 2_restar 3_multiplicar 4_dividir 0_salir");
+    int.TryParse(Console.ReadLine(), out int operacion);
 
-//lee una línea de texto ingresada por el usuario, intenta convertirla a un numero entero 
-//y almacena el resultado de la conversion en la variable num.
-bool control=int.TryParse(Console.ReadLine(), out int num); 
+    Console.WriteLine("Ingrese valor1:");
+    float.TryParse(Console.ReadLine(), out float a);
+    Console.WriteLine("Ingrese valor2:");
+    float.TryParse(Console.ReadLine(), out float b);
 
-if(control){//control si el valor ingresado es un numero 
-    if (num>0){
-        int numInvertido=0;
-        while(num>0){
-            int resto=num % 10;
-            numInvertido=numInvertido * 10 + resto;
-            num/= 10;
-        }
-        Console.WriteLine($"El numero invertido es: {numInvertido}");
-    }else{
-        Console.WriteLine("El numero ingresado es menor que cero");
+    float resultado=0;
+    switch(operacion){
+        case 1: 
+            resultado = a+b; 
+            break;
+
+        case 2: 
+            resultado = a-b; 
+            break;
+
+        case 3: 
+            resultado = a*b; 
+            break;
+
+        case 4: 
+           if (b != 0){
+                resultado = a / b;
+            }else{
+                Console.WriteLine("No se puede dividir entre 0. Ingrese otro número.");
+            }
+            break;
+
+        default:
+            Console.WriteLine("Operacion invalida, elija otra operacion");
+            continue;
     }
-}else{
-    Console.WriteLine("No ingreso un numero valido");
-}
+    
+    Console.WriteLine("Resultado: " + resultado);
 
+    Console.WriteLine("Desea Realizar otra operacion? 1_Si Enter_No");
+    if(!int.TryParse(Console.ReadLine(), out int opcion)){
+        control = 0;
+    }
+}
+Console.WriteLine("¡Gracias por usar la calculadora!");
 
 
 
