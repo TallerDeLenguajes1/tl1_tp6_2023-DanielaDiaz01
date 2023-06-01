@@ -1,46 +1,58 @@
 ﻿
-/*PUNTO3_calculadora V2
-Implementar las mejoras en la calculadora 
-Solicite al usuario un número y muestre por pantalla:
-    ● El valor absoluto de un numero
-    ● El cuadrado
-    ● La raiz cuadrada
-    ● El seno
-    ● El Coseno
-    ● La parte entera de un tipo float.
-Luego de esto, solicite dos numeros al usuario y determine:
-    ● El Maximo entre los dos numeros
-    ● El Minimo entre los dos naumeros
-Contemplar el caso de que el usuario no ingrese un número valido
+/*PUNTO2_Calculadora V1
+construya un programa que sea una calculadora que permita al usuario realizar las 4 
+operaciones basicas (Sumar, Restar, Multiplicar y Dividir) a partir de un menú para 
+seleccionar la opcion a elegir y que luego pida dos numeros y que devuelva el resultado 
+de la operacion seleccionada. Ademas una vez que termine de realizar la operacion le 
+pregunte si desea realizar otro calculo.
 */
 
-Console.WriteLine("Ingrese un numero:");
+Console.WriteLine("\nCALCULADORA");
+Console.WriteLine("\nSeleccione una opcion:");
 
-if (!float.TryParse(Console.ReadLine(), out float numero)){
-    Console.WriteLine("El numero ingresado es invalido, ingrese otro numero");
-        return;
+int control=1;
+while(control != 0){
+    Console.WriteLine("\n1_sumar 2_restar 3_multiplicar 4_dividir 0_salir");
+    int.TryParse(Console.ReadLine(), out int operacion);
+
+    Console.WriteLine("Ingrese valor1:");
+    float.TryParse(Console.ReadLine(), out float a);
+    Console.WriteLine("Ingrese valor2:");
+    float.TryParse(Console.ReadLine(), out float b);
+
+    float resultado=0;
+    switch(operacion){
+        case 1: 
+            resultado = a+b; 
+            break;
+
+        case 2: 
+            resultado = a-b; 
+            break;
+
+        case 3: 
+            resultado = a*b; 
+            break;
+
+        case 4: 
+           if (b != 0){
+                resultado = a / b;
+            }else{
+                Console.WriteLine("No se puede dividir entre 0. Ingrese otro número.");
+            }
+            break;
+
+        default:
+            Console.WriteLine("Operacion invalida, elija otra operacion");
+            continue;
+    }
+    
+    Console.WriteLine("Resultado: " + resultado);
+
+    Console.WriteLine("Desea Realizar otra operacion? 1_Si Enter_No");
+    if(!int.TryParse(Console.ReadLine(), out int opcion)){
+        control = 0;
+    }
 }
-
-Console.WriteLine("Valor absoluto: " + Math.Abs(numero));
-Console.WriteLine("Cuadrado: " + Math.Pow(numero, 2));
-Console.WriteLine("Raíz cuadrada: " + Math.Sqrt(numero));
-Console.WriteLine("Seno: " + Math.Sin(numero));
-Console.WriteLine("Coseno: " + Math.Cos(numero));
-Console.WriteLine("Parte entera: " + Math.Truncate(numero));
-
-Console.WriteLine("Ingrese dos numeros:");
-
-float num1, num2;
-if (!float.TryParse(Console.ReadLine(), out num1)){
-    Console.WriteLine("El numero ingresado es invalido, ingrese otro numero");
-        return;
-}
-
-if (!float.TryParse(Console.ReadLine(), out num2)){
-    Console.WriteLine("El numero ingresado es invalido, ingrese otro numero");
-        return;
-}
-
-Console.WriteLine("Máximo: " + Math.Max(num1, num2));
-Console.WriteLine("Mínimo: " + Math.Min(num1, num2));
+Console.WriteLine("¡Gracias por usar la calculadora!");
 
